@@ -9,7 +9,7 @@ ENV PROXY_PORT=3128
 ENV SOCKS_PORT=3129
 
 HEALTHCHECK --interval=30s --timeout=2s \
-  CMD nc -zv $(cat /etc/healthcheck) 3128 && nc -zv $(cat /etc/healthcheck) 3129 || exit 1
+  CMD nc -zv $(cat /etc/healthcheck) $PROXY_PORT && nc -zv $(cat /etc/healthcheck) $SOCKS_PORT || exit 1
 
 RUN \
     echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
